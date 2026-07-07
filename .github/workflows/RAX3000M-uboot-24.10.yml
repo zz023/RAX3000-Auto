@@ -27,7 +27,7 @@ env:
   DIY_P1_SH: diy-part1.sh
   DIY_P2_SH: diy-part2.sh
   UPLOAD_BIN_DIR: true
-  UPLOAD_FIRMWARE: true
+  UPLOAD_FIRMWARE: false
   UPLOAD_COWTRANSFER: false
   UPLOAD_WETRANSFER: false
   UPLOAD_RELEASE: false
@@ -45,14 +45,26 @@ jobs:
       env:
         DEBIAN_FRONTEND: noninteractive
       run: |
-        sudo rm -rf /etc/apt/sources.list.d/* /usr/share/dotnet /usr/local/lib/android /opt/ghc
+        sudo rm -rf /etc/apt/sources.list.d/*
+        sudo rm -rf /usr/share/dotnet
+        sudo rm -rf /usr/local/lib/android
+        sudo rm -rf /opt/ghc
+        sudo rm -rf /opt/hostedtoolcache
+        sudo rm -rf /usr/local/share/boost
+        sudo rm -rf /usr/lib/jvm
+
+        docker system prune -af
+
         sudo -E apt-get -qq update
         sudo -E apt-get -qq install $(curl -fsSL git.io/depends-ubuntu-2004)
+
         sudo -E apt-get -qq autoremove --purge
         sudo -E apt-get -qq clean
-        sudo timedatectl set-timezone "$TZ"
+
         sudo mkdir -p /workdir
         sudo chown $USER:$GROUPS /workdir
+
+        df -h
 
     - name: Clone source code
       working-directory: /workdir
@@ -97,6 +109,11 @@ jobs:
         make download -j8
         find dl -size -1024c -exec ls -l {} \;
         find dl -size -1024c -exec rm -f {} \;
+
+    - name: Before compile disk
+      run: |
+        df -h
+        du -sh /workdir/openwrt/*
 
     - name: Compile the firmware
       id: compile
