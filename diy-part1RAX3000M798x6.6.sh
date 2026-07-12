@@ -22,4 +22,5 @@
 #echo 'src-git passwall https://github.com/Openwrt-Passwall/openwrt-passwall-packages.git' >>feeds.conf.default
 #echo 'src-git passwall2 https://github.com/Openwrt-Passwall/openwrt-passwall2.git' >>feeds.conf.default
 sed -i '1i src-git passwall2 https://github.com/Openwrt-Passwall/openwrt-passwall2.git' feeds.conf.default
-sed -i '1i src-git passwall https://github.com/Openwrt-Passwall/openwrt-passwall-packages.git' feeds.conf.default
+sed -i '1i src-git passwall_luci https://github.com/Openwrt-Passwall/openwrt-passwall.git;main' feeds.conf.default
+sed -i '1i src-git passwall_packages https://github.com/Openwrt-Passwall/openwrt-passwall-packages.git;main' feeds.conf.default
