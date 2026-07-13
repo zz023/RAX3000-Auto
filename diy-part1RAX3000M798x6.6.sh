@@ -21,6 +21,10 @@
 #echo 'src-git passwall https://github.com/xiaorouji/openwrt-passwall' >>feeds.conf.default
 #echo 'src-git passwall https://github.com/Openwrt-Passwall/openwrt-passwall-packages.git' >>feeds.conf.default
 #echo 'src-git passwall2 https://github.com/Openwrt-Passwall/openwrt-passwall2.git' >>feeds.conf.default
-sed -i '1i src-git passwall2 https://github.com/Openwrt-Passwall/openwrt-passwall2.git' feeds.conf.default
-sed -i '1i src-git passwall_luci https://github.com/Openwrt-Passwall/openwrt-passwall.git;main' feeds.conf.default
-sed -i '1i src-git passwall_packages https://github.com/Openwrt-Passwall/openwrt-passwall-packages.git;main' feeds.conf.default
+
+
+sed -i 's|src-git packages https://github.com/immortalwrt/packages.git;openwrt-24.10|src-git packages https://github.com/zz023/ImmortalWrtpackages.git;openwrt-24.10|g' feeds.conf.default
+sed -i 's|src-git luci https://github.com/immortalwrt/luci.git;openwrt-24.10|src-git luci https://github.com/zz023/immortalwrtluci.git;openwrt-24.10|g' feeds.conf.default
+
+
+sed -i 's/192.168.6.1/192.168.2.1/g' feeds.conf.default
