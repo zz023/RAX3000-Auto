@@ -27,4 +27,4 @@ sed -i 's|src-git packages https://github.com/immortalwrt/packages.git;openwrt-2
 sed -i 's|src-git luci https://github.com/immortalwrt/luci.git;openwrt-24.10|src-git luci https://github.com/zz023/immortalwrtluci.git;openwrt-24.10|g' feeds.conf.default
 
 
-sed -i 's/192.168.6.1/192.168.2.1/g' feeds.conf.default
+
